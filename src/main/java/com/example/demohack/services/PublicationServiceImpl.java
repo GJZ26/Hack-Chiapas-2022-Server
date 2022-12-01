@@ -93,6 +93,8 @@ public class PublicationServiceImpl implements IPublicationService {
         Publication response = new Publication();
         response.setCreationDate(request.getCreationDate());
         response.setImage(request.getImage());
+        response.setTitle(request.getTitle());
+        response.setText(request.getText());
         return response;
 
     }
@@ -102,12 +104,16 @@ public class PublicationServiceImpl implements IPublicationService {
         response.setId(request.getId());
         response.setCreationDate(request.getCreationDate());
         response.setImage(request.getImage());
+        response.setTitle(request.getTitle());
+        response.setText(request.getText());
         return response;
     }
 
     private Publication update (Publication publication, UpdatePublicationRequest request) {
         publication.setCreationDate(request.getCreationDate());
         publication.setImage(request.getImage());
+        publication.setTitle(request.getTitle());
+        publication.setText(request.getText());
         return repository.save(publication);
     }
 }
