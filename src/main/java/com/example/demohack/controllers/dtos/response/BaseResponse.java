@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Builder @Getter
-public class BaseRespose {
+public class BaseResponse {
     private Object data;
 
     private String message;
