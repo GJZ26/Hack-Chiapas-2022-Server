@@ -1,6 +1,5 @@
 package com.example.demohack.controllers.dtos.response;
 
-<<<<<<< HEAD
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
