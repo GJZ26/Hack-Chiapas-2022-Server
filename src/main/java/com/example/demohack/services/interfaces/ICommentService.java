@@ -15,5 +15,7 @@ public interface ICommentService {
     
     BaseResponse update(Long id, UpdateCommentRequest request);
 
-    BaseResponse listAllCommentsByIdUser(Long userId);
+    BaseResponse listAllCommentsByUserId(Long userId);
+    
+    BaseResponse listAllCommentsByPublicationId(Long publicationId);
 }

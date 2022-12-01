@@ -16,4 +16,6 @@ public class GetCommentResponse {
     private String status;
 
     private CreateUserResponse user;
+
+    private CreatePublicationResponse publication;
 }

@@ -17,5 +17,7 @@ public class CommentResponse {
     private String status;
     
     private CreateUserResponse user;
+
+    private CreatePublicationResponse publication;
     
 }

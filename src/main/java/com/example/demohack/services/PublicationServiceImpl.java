@@ -104,13 +104,13 @@ public class PublicationServiceImpl implements IPublicationService {
 
     }
 
-    private CreatePublicationResponse from (Publication request) {
+    private CreatePublicationResponse from (Publication publication) {
         CreatePublicationResponse response = new CreatePublicationResponse();
-        response.setId(request.getId());
-        response.setCreationDate(request.getCreationDate());
-        response.setImage(request.getImage());
-        response.setTitle(request.getTitle());
-        response.setText(request.getText());
+        response.setId(publication.getId());
+        response.setCreationDate(publication.getCreationDate());
+        response.setImage(publication.getImage());
+        response.setTitle(publication.getTitle());
+        response.setText(publication.getText());
         return response;
     }
 

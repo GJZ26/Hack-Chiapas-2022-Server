@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 import com.example.demohack.controllers.dtos.request.CreateCommentRequest;
 import com.example.demohack.controllers.dtos.request.UpdateCommentRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
+import com.example.demohack.controllers.dtos.response.CreatePublicationResponse;
 import com.example.demohack.controllers.dtos.response.CreateUserResponse;
 import com.example.demohack.controllers.dtos.response.GetCommentResponse;
 import com.example.demohack.entities.Comment;
 import com.example.demohack.entities.User;
-import com.example.demohack.entities.projections.CommentProjection;
 import com.example.demohack.repositories.ICommentRepository;
 import com.example.demohack.services.interfaces.ICommentService;
 import com.example.demohack.services.interfaces.IUserService;
@@ -31,6 +31,7 @@ public class CommentServiceImpl implements ICommentService{
 
     @Autowired
     private IUserService userService;
+
     @Autowired
     private IPublicationService publicationService;
 
@@ -108,6 +109,7 @@ public class CommentServiceImpl implements ICommentService{
         response.setId(comment.getId());
         response.setStatus(comment.getStatus());
         response.setUser(from(comment.getUser()));
+        response.setPublication(from(comment.getPublication()));
         return response;
     }
 
@@ -120,6 +122,17 @@ public class CommentServiceImpl implements ICommentService{
         return response;
     }
 
+
+    private CreatePublicationResponse from (Publication publication) {
+        CreatePublicationResponse response = new CreatePublicationResponse();
+        response.setId(publication.getId());
+        response.setCreationDate(publication.getCreationDate());
+        response.setImage(publication.getImage());
+        response.setTitle(publication.getTitle());
+        response.setText(publication.getText());
+        return response;
+    }
+    
     private Comment from (CreateCommentRequest request){
         Comment comment = new Comment();
         comment.setComment(request.getComment());
@@ -127,6 +140,7 @@ public class CommentServiceImpl implements ICommentService{
         comment.setDate(getDate());
         comment.setStatus("origin");
         comment.setUser(userService.findById(request.getUserId()));
+        comment.setPublication(publicationService.findById(request.getPublicationId()));
 
         Publication publication = publicationService.findById(request.getPublicationId());
         comment.setPublication( publication );
@@ -144,29 +158,6 @@ public class CommentServiceImpl implements ICommentService{
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
     }
-
-    @Override
-    public BaseResponse listAllCommentsByIdUser(Long userId) {
-        List<CommentProjection>comments= repository.findByIdUser(userId);
-        List<GetCommentResponse> response= comments.stream().map(this::from).collect(Collectors.toList());
-        return BaseResponse.builder()
-            .data(response)
-            .message("Comment has been found")
-            .success(Boolean.TRUE)
-            .httpStatus(HttpStatus.OK).build();
-    }
-
-    private GetCommentResponse from (CommentProjection comment ){
-        System.out.println(comment);
-        GetCommentResponse response = new GetCommentResponse();
-        response.setComment(comment.getComment());
-        response.setDate(comment.getDate());
-        response.setEmail(comment.getEmail());
-        response.setId(comment.getId());
-        response.setStatus(comment.getStatus());
-        response.setUser(from( userService.findById(comment.getUser_id())));
-        return response;
-    }
-   
+    
     
 }
