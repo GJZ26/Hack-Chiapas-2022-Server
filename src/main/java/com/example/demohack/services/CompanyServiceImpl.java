@@ -86,7 +86,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
     @Override
     public void delete(Long id) {
-
+        repository.deleteById(id);
     }
 
     private Company from (CreateCompanyRequest request) {
