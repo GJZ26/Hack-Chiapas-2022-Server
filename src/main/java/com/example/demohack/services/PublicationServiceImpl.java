@@ -89,6 +89,11 @@ public class PublicationServiceImpl implements IPublicationService {
         repository.deleteById(id);
     }
 
+    @Override
+    public Publication findById(Long id) {
+        return repository.findById(id).orElseThrow(()-> new RuntimeException("The Publication with id: "+ id + " doesn't exist"));
+    }
+
     private Publication from (CreatePublicationRequest request) {
         Publication response = new Publication();
         response.setCreationDate(request.getCreationDate());

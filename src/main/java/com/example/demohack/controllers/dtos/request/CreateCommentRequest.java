@@ -10,4 +10,5 @@ public class CreateCommentRequest {
     private String comment; 
 
     private Long userId;
+    private Long publicationId;
 }

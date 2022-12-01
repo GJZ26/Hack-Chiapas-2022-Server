@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.demohack.entities.Publication;
+import com.example.demohack.services.interfaces.IPublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ public class CommentServiceImpl implements ICommentService{
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IPublicationService publicationService;
 
     @Override
     public BaseResponse get(Long id) {
@@ -122,6 +126,10 @@ public class CommentServiceImpl implements ICommentService{
         comment.setDate(getDate());
         comment.setStatus("origin");
         comment.setUser(userService.findById(request.getUserId()));
+
+        Publication publication = publicationService.findById(request.getPublicationId());
+        comment.setPublication( publication );
+
         return repository.save(comment);
     }
 
