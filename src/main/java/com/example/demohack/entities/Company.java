@@ -21,5 +21,8 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Product> products;
 
+    @ManyToOne
+    private Category category;
+
 
 }

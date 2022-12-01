@@ -1,9 +1,7 @@
 package com.example.demohack.services.interfaces;
 
 import com.example.demohack.controllers.dtos.request.CreateProductRequest;
-import com.example.demohack.controllers.dtos.request.CreateUserRequest;
 import com.example.demohack.controllers.dtos.request.UpdateProductRequest;
-import com.example.demohack.controllers.dtos.request.UpdateUserRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
 
 public interface IProductService {
