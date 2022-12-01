@@ -5,7 +5,6 @@ import com.example.demohack.controllers.dtos.request.UpdateCompanyRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
 import com.example.demohack.services.interfaces.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

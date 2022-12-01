@@ -1,11 +1,9 @@
 package com.example.demohack.controllers;
 
-import com.example.demohack.controllers.dtos.request.CreateCompanyRequest;
 import com.example.demohack.controllers.dtos.request.CreateUserRequest;
-import com.example.demohack.controllers.dtos.request.UpdateCompanyRequest;
+import com.example.demohack.controllers.dtos.request.LoginRequest;
 import com.example.demohack.controllers.dtos.request.UpdateUserRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
-import com.example.demohack.services.interfaces.ICompanyService;
 import com.example.demohack.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +32,11 @@ public class UserController {
     @PostMapping
     ResponseEntity<BaseResponse> create (@RequestBody @Valid CreateUserRequest request) {
         BaseResponse baseResponse = service.create(request);
+        return new ResponseEntity<BaseResponse>(baseResponse, baseResponse.getHttpStatus());
+    }
+    @PostMapping("/login")
+    ResponseEntity<BaseResponse> create (@RequestBody @Valid LoginRequest request) {
+        BaseResponse baseResponse = service.login(request);
         return new ResponseEntity<BaseResponse>(baseResponse, baseResponse.getHttpStatus());
     }
 
