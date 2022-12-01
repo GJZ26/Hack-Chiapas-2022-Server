@@ -8,4 +8,6 @@ public class CreatePublicationResponse {
     private Long id;
     private String creationDate;
     private String image;
+    private String title;
+    private String text;
 }

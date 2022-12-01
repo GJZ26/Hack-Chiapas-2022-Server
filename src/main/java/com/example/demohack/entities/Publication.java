@@ -14,6 +14,8 @@ public class Publication {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
+    private String text;
     private String creationDate;
     private String image;
 }

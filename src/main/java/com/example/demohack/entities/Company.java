@@ -18,8 +18,8 @@ public class Company {
     private String register_date;
     private String photo;
 
-
     @OneToMany(mappedBy = "company")
     private List<Product> products;
+
 
 }

@@ -7,4 +7,6 @@ import lombok.Setter;
 public class UpdatePublicationRequest {
     private String creationDate;
     private String image;
+    private String title;
+    private String text;
 }
