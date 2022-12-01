@@ -10,4 +10,5 @@ public class CreateCompanyRequest {
     private String description;
     private String address;
     private String register_date;
+    private String photo;
 }
