@@ -1,6 +1,7 @@
 package com.example.demohack.services;
 
 import com.example.demohack.controllers.dtos.request.CreateUserRequest;
+import com.example.demohack.controllers.dtos.request.LoginRequest;
 import com.example.demohack.controllers.dtos.request.UpdateUserRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
 import com.example.demohack.controllers.dtos.response.CreateUserResponse;
@@ -101,7 +102,6 @@ public class UserServiceImpl implements IUserService {
         CreateUserResponse response = new CreateUserResponse();
         response.setId(request.getId());
         response.setEmail(request.getEmail());
-        response.setPassword(request.getPassword());
         response.setUsername(request.getUsername());
 
         return response;
@@ -112,5 +112,24 @@ public class UserServiceImpl implements IUserService {
         user.setPassword(request.getPassword());
         user.setUsername(request.getUsername());
         return repository.save(user);
+    }
+
+    private CreateUserResponse from(LoginRequest request){
+        String email=request.getEmail();
+        String password=request.getPassword();
+        return repository.findByEmailAndPassword(email, password)
+                .map(this::from)
+                .orElseThrow(() -> new RuntimeException("Incorrect sesion"));
+    }
+
+    @Override
+    public BaseResponse login(LoginRequest request) {
+        CreateUserResponse response=from(request);
+        return BaseResponse.builder()
+                .data(response)
+                .message("You are Logged in")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
     }
 }
