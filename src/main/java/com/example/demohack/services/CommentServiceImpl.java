@@ -19,6 +19,7 @@ import com.example.demohack.controllers.dtos.response.CreateUserResponse;
 import com.example.demohack.controllers.dtos.response.GetCommentResponse;
 import com.example.demohack.entities.Comment;
 import com.example.demohack.entities.User;
+import com.example.demohack.entities.projections.CommentProjection;
 import com.example.demohack.repositories.ICommentRepository;
 import com.example.demohack.services.interfaces.ICommentService;
 import com.example.demohack.services.interfaces.IUserService;
@@ -158,6 +159,43 @@ public class CommentServiceImpl implements ICommentService{
         DateTimeFormatter format= DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         return format;
     }
+
+    @Override
+    public BaseResponse listAllCommentsByUserId(Long userId) {
+        List<CommentProjection>comments= repository.listAllCommentsByUserId(userId);
+        List<GetCommentResponse> response= comments.stream().map(this::from).collect(Collectors.toList());
+        return BaseResponse.builder()
+            .data(response)
+            .message("Comments has been found")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
+
+    @Override
+    public BaseResponse listAllCommentsByPublicationId(Long publicationId) {
+        List<CommentProjection>comments= repository.listAllCommentsByPublicationId(publicationId);
+        List<GetCommentResponse> response= comments.stream().map(this::from).collect(Collectors.toList());
+        return BaseResponse.builder()
+            .data(response)
+            .message("Comments has been found")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
+
+    private GetCommentResponse from (CommentProjection comment ){
+        System.out.println(comment);
+        GetCommentResponse response = new GetCommentResponse();
+        response.setComment(comment.getComment());
+        response.setDate(comment.getDate());
+        response.setEmail(comment.getEmail());
+        response.setId(comment.getId());
+        response.setStatus(comment.getStatus());
+        response.setUser(from( userService.findById(comment.getUser_id())));
+        response.setPublication(from(publicationService.findById(comment.getPublication_id())));
+        return response;
+    }
+
+    
     
     
 }
