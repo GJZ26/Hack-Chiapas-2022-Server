@@ -33,12 +33,6 @@ public class CommentController {
         BaseResponse baseResponse= service.list();
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
-
-    @GetMapping("user/{id}")
-    public ResponseEntity<BaseResponse> listAllCommentsByIdUser(@PathVariable long id){
-        BaseResponse baseResponse= service.listAllCommentsByIdUser(id);
-        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
-    }
     @GetMapping("{id}")
     public ResponseEntity<BaseResponse> get(@PathVariable long id){
         BaseResponse baseResponse= service.get(id);
