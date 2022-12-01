@@ -11,4 +11,5 @@ public class CreateCompanyResponse {
     private String address;
     private String register_date;
     private String photo;
+    private GetCategoryResponse category;
 }

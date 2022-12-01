@@ -102,5 +102,11 @@ public class CategoryServiceImpl implements ICategoryService{
         response.setDescription(category.getDescription());
         return response;
     }
+
+    @Override
+    public Category getbyId(Long id) {
+        return repository.findById(id)
+        .orElseThrow(() -> new RuntimeException("The Category does not exist"));
+    }
     
 }

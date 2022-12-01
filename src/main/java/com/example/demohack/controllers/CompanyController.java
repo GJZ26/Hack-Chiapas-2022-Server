@@ -21,6 +21,11 @@ public class CompanyController {
         BaseResponse baseResponse = service.get(id);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
+    @GetMapping("category/{id}")
+    ResponseEntity<BaseResponse> listAllCompaniesByIdCategory (@PathVariable Long id) {
+        BaseResponse baseResponse = service.listAllCompaniesByIdCategory(id);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
 
     @GetMapping
     ResponseEntity<BaseResponse> getAll ( ) {

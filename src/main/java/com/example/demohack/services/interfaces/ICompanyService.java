@@ -17,4 +17,8 @@ public interface ICompanyService {
     void delete (Long id);
 
     Company getCompanyById(Long id);
+
+    BaseResponse listAllCompaniesByIdCategory(Long categoryId);
+
+
 }

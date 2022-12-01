@@ -4,22 +4,30 @@ import com.example.demohack.controllers.dtos.request.CreateCompanyRequest;
 import com.example.demohack.controllers.dtos.request.UpdateCompanyRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
 import com.example.demohack.controllers.dtos.response.CreateCompanyResponse;
+import com.example.demohack.entities.Category;
 import com.example.demohack.entities.Company;
+import com.example.demohack.entities.projections.CompanyProjection;
 import com.example.demohack.repositories.ICompanyRepository;
+import com.example.demohack.services.interfaces.ICategoryService;
 import com.example.demohack.services.interfaces.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demohack.controllers.dtos.response.GetCategoryResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements ICompanyService {
 
     @Autowired
     private ICompanyRepository repository;
+
+    @Autowired 
+    private ICategoryService categoryService;
     @Override
     public BaseResponse get(Long id) {
         Optional<Company> optionalCompany = repository.findById(id);
@@ -100,6 +108,7 @@ public class CompanyServiceImpl implements ICompanyService {
         response.setDescription(request.getDescription());
         response.setAddress(request.getAddress());
         response.setRegister_date(request.getRegister_date());
+        response.setCategory(categoryService.getbyId(request.getCategoryId()));
         response.setPhoto(request.getPhoto());
 
         return response;
@@ -112,7 +121,16 @@ public class CompanyServiceImpl implements ICompanyService {
         response.setDescription(request.getDescription());
         response.setAddress(request.getAddress());
         response.setRegister_date(request.getRegister_date());
+        response.setCategory(from(request.getCategory()));
         response.setPhoto(request.getPhoto());
+        return response;
+    }
+
+    private GetCategoryResponse from(Category category){
+        GetCategoryResponse response = new GetCategoryResponse();
+        response.setId(category.getId());
+        response.setName(category.getName());
+        response.setDescription(category.getDescription());
         return response;
     }
 
@@ -124,4 +142,29 @@ public class CompanyServiceImpl implements ICompanyService {
         company.setPhoto(request.getPhoto());
         return repository.save(company);
     }
+
+    @Override
+    public BaseResponse listAllCompaniesByIdCategory(Long categoryId) {
+        List<CompanyProjection>comments= repository.listAllCompaniesByCategoryId(categoryId);
+        List<CreateCompanyResponse> response= comments.stream().map(this::from).collect(Collectors.toList());
+        return BaseResponse.builder()
+            .data(response)
+            .message("Comment has been found")
+            .success(Boolean.TRUE)
+            .httpStatus(HttpStatus.OK).build();
+    }
+
+    private CreateCompanyResponse from (CompanyProjection request) {
+        CreateCompanyResponse response = new CreateCompanyResponse();
+        response.setId(request.getId());
+        response.setName(request.getName());
+        response.setDescription(request.getDescription());
+        response.setAddress(request.getAddress());
+        response.setRegister_date(request.getRegister_date());
+        response.setCategory(from(categoryService.getbyId(request.getCategory_id())));
+        response.setPhoto(request.getPhoto());
+        return response;
+    }
+
+
 }

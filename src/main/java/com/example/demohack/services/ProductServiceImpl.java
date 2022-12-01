@@ -1,22 +1,15 @@
 package com.example.demohack.services;
 
 import com.example.demohack.controllers.dtos.request.CreateProductRequest;
-import com.example.demohack.controllers.dtos.request.CreateUserRequest;
 import com.example.demohack.controllers.dtos.request.UpdateProductRequest;
-import com.example.demohack.controllers.dtos.request.UpdateUserRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
-import com.example.demohack.controllers.dtos.response.CreateCompanyResponse;
 import com.example.demohack.controllers.dtos.response.CreateProductResponses;
-import com.example.demohack.controllers.dtos.response.CreateUserResponse;
 import com.example.demohack.entities.Company;
 import com.example.demohack.entities.Product;
-import com.example.demohack.entities.User;
 import com.example.demohack.entities.projections.ProductProjection;
 import com.example.demohack.repositories.IProductRepository;
-import com.example.demohack.repositories.IUserRepository;
 import com.example.demohack.services.interfaces.ICompanyService;
 import com.example.demohack.services.interfaces.IProductService;
-import com.example.demohack.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,9 @@
 package com.example.demohack.controllers;
 
 import com.example.demohack.controllers.dtos.request.CreateProductRequest;
-import com.example.demohack.controllers.dtos.request.CreateUserRequest;
 import com.example.demohack.controllers.dtos.request.UpdateProductRequest;
-import com.example.demohack.controllers.dtos.request.UpdateUserRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
 import com.example.demohack.services.interfaces.IProductService;
-import com.example.demohack.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
