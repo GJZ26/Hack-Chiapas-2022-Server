@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.example.demohack.controllers.dtos.response;
 
 import lombok.Builder;
@@ -13,3 +14,5 @@ public class    BaseResponse {
     private HttpStatus httpStatus;
 }
 
+=======
+>>>>>>> tagshon
