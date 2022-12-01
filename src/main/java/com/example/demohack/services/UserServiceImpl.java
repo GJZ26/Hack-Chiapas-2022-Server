@@ -76,12 +76,12 @@ public class UserServiceImpl implements IUserService {
 
             return BaseResponse.builder()
                     .data(response)
-                    .message("Company updated correctly")
+                    .message("user updated correctly")
                     .success(Boolean.TRUE)
                     .httpStatus(HttpStatus.OK)
                     .build();
         }
-        throw new RuntimeException("The company with id: "+ id + " doesn't exist");
+        throw new RuntimeException("The user with id: "+ id + " doesn't exist");
     }
 
     @Override
@@ -100,6 +100,9 @@ public class UserServiceImpl implements IUserService {
     private CreateUserResponse from (User request) {
         CreateUserResponse response = new CreateUserResponse();
         response.setId(request.getId());
+        response.setEmail(request.getEmail());
+        response.setPassword(request.getPassword());
+        response.setUsername(request.getUsername());
 
         return response;
     }
