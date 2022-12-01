@@ -16,4 +16,6 @@ public interface IProductService {
     BaseResponse update (Long id, UpdateProductRequest request);
 
     void delete (Long id);
+
+    BaseResponse getAllProductsByCompanyId(Long id);
 }

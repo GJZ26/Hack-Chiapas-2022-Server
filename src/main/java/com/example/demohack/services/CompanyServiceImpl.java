@@ -89,6 +89,11 @@ public class CompanyServiceImpl implements ICompanyService {
         repository.deleteById(id);
     }
 
+    @Override
+    public Company getCompanyById(Long id) {
+        return repository.findById(id).orElseThrow( ()-> new RuntimeException("The company with the id "+ id +" doesn't exists") );
+    }
+
     private Company from (CreateCompanyRequest request) {
         Company response = new Company();
         response.setName(request.getName());

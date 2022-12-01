@@ -3,10 +3,8 @@ package com.example.demohack.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -18,4 +16,7 @@ public class Company {
     private String description;
     private String address;
     private String register_date;
+
+    @OneToMany(mappedBy = "company")
+    private List<Product> products;
 }

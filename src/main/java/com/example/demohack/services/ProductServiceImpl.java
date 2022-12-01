@@ -5,12 +5,16 @@ import com.example.demohack.controllers.dtos.request.CreateUserRequest;
 import com.example.demohack.controllers.dtos.request.UpdateProductRequest;
 import com.example.demohack.controllers.dtos.request.UpdateUserRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
+import com.example.demohack.controllers.dtos.response.CreateCompanyResponse;
 import com.example.demohack.controllers.dtos.response.CreateProductResponses;
 import com.example.demohack.controllers.dtos.response.CreateUserResponse;
+import com.example.demohack.entities.Company;
 import com.example.demohack.entities.Product;
 import com.example.demohack.entities.User;
+import com.example.demohack.entities.projections.ProductProjection;
 import com.example.demohack.repositories.IProductRepository;
 import com.example.demohack.repositories.IUserRepository;
+import com.example.demohack.services.interfaces.ICompanyService;
 import com.example.demohack.services.interfaces.IProductService;
 import com.example.demohack.services.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private IProductRepository repository;
+    @Autowired
+    private ICompanyService companyService;
     @Override
     public BaseResponse get(Long id) {
         Optional<Product> optionalUser = repository.findById(id);
@@ -95,11 +101,32 @@ public class ProductServiceImpl implements IProductService {
         repository.deleteById(id);
     }
 
+    @Override
+    public BaseResponse getAllProductsByCompanyId(Long id) {
+        List<ProductProjection> allProductsByCompanyId = repository.getAllProductsByCompanyId(id);
+        List<CreateProductResponses> responses = new ArrayList<>();
+
+        for (ProductProjection product : allProductsByCompanyId) {
+            responses.add(from(product));
+        }
+
+        return BaseResponse.builder()
+                .data(responses)
+                .message("user updated correctly")
+                .success(Boolean.TRUE)
+                .httpStatus(HttpStatus.OK)
+                .build();
+    }
+
     private Product from(CreateProductRequest request) {
         Product response = new Product();
         response.setName(request.getName());
         response.setPrice(request.getPrice());
         response.setPhoto(request.getPhoto());
+
+        Company company = companyService.getCompanyById(request.getCompany_id());
+        response.setCompany(company);
+
         return response;
     }
 
@@ -117,5 +144,14 @@ public class ProductServiceImpl implements IProductService {
         product.setPrice(request.getPrice());
         product.setPhoto(request.getPhoto());
         return repository.save(product);
+    }
+
+    private CreateProductResponses from (ProductProjection request) {
+        CreateProductResponses response = new CreateProductResponses();
+        response.setId(request.getId());
+        response.setName(request.getName());
+        response.setPrice(request.getPrice());
+        response.setPhoto(request.getPhoto());
+        return response;
     }
 }

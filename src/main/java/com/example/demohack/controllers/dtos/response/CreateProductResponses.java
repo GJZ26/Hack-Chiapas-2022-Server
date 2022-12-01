@@ -9,4 +9,5 @@ public class CreateProductResponses {
     private String name;
     private Double price;
     private String photo;
+
 }

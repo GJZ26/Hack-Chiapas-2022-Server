@@ -8,4 +8,6 @@ public class CreateProductRequest {
     private String name;
     private Double price;
     private String photo;
+
+    private Long company_id;
 }
