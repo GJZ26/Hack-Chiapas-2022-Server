@@ -18,4 +18,5 @@ public class Company {
     private String description;
     private String address;
     private String register_date;
+    private String photo;
 }

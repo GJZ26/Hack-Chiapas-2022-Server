@@ -95,6 +95,7 @@ public class CompanyServiceImpl implements ICompanyService {
         response.setDescription(request.getDescription());
         response.setAddress(request.getAddress());
         response.setRegister_date(request.getRegister_date());
+        response.setPhoto(request.getPhoto());
 
         return response;
     }
@@ -106,6 +107,7 @@ public class CompanyServiceImpl implements ICompanyService {
         response.setDescription(request.getDescription());
         response.setAddress(request.getAddress());
         response.setRegister_date(request.getRegister_date());
+        response.setPhoto(request.getPhoto());
         return response;
     }
 
@@ -114,6 +116,7 @@ public class CompanyServiceImpl implements ICompanyService {
         company.setDescription(request.getDescription());
         company.setAddress(request.getAddress());
         company.setRegister_date(request.getRegister_date());
+        company.setPhoto(request.getPhoto());
         return repository.save(company);
     }
 }
