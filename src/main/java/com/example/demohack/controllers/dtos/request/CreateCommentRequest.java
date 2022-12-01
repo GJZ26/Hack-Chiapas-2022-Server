@@ -5,10 +5,13 @@ import lombok.Setter;
 
 @Getter @Setter
 public class CreateCommentRequest {
+
     private String email;
 
     private String comment; 
 
     private Long userId;
+
     private Long publicationId;
+    
 }

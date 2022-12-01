@@ -14,4 +14,8 @@ public interface ICommentService {
     void delete(Long id);
     
     BaseResponse update(Long id, UpdateCommentRequest request);
+
+    BaseResponse listAllCommentsByUserId(Long userId);
+    
+    BaseResponse listAllCommentsByPublicationId(Long publicationId);
 }

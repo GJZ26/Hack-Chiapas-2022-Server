@@ -38,6 +38,16 @@ public class CommentController {
         BaseResponse baseResponse= service.get(id);
         return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
     }
+    @GetMapping("user/{id}")
+    public ResponseEntity<BaseResponse> listAllCommentsByUserId(@PathVariable long id){
+        BaseResponse baseResponse= service.listAllCommentsByUserId(id);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
+    @GetMapping("publication/{id}")
+    public ResponseEntity<BaseResponse> listAllCommentsByPublicationId(@PathVariable long id){
+        BaseResponse baseResponse= service.listAllCommentsByPublicationId(id);
+        return new ResponseEntity<>(baseResponse, baseResponse.getHttpStatus());
+    }
     @PutMapping("{id}")
     public ResponseEntity<BaseResponse> update(@PathVariable Long id, @RequestBody UpdateCommentRequest request){
         BaseResponse baseResponse= service.update(id, request);
