@@ -4,6 +4,7 @@ import com.example.demohack.controllers.dtos.request.CreateUserRequest;
 import com.example.demohack.controllers.dtos.request.LoginRequest;
 import com.example.demohack.controllers.dtos.request.UpdateUserRequest;
 import com.example.demohack.controllers.dtos.response.BaseResponse;
+import com.example.demohack.entities.User;
 
 public interface IUserService {
 
@@ -18,4 +19,6 @@ public interface IUserService {
     BaseResponse update (Long id, UpdateUserRequest request);
 
     void delete (Long id);
+
+    User findById(Long id);
 }

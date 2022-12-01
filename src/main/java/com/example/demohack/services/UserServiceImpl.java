@@ -132,4 +132,10 @@ public class UserServiceImpl implements IUserService {
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
+
+    @Override
+    public User findById(Long id) {
+        return repository.findById(id)
+            .orElseThrow(()-> new RuntimeException("The User does not exist"));
+    }
 }
